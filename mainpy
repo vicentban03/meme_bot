@@ -1,0 +1,58 @@
+import os, random
+import discord, requests
+from discord.ext import commands
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix='!', intents=intents)
+@bot.event
+async def on_ready():
+    print(f'Ha iniciado sesión como {bot.user}')
+  
+def get_animals_image_url():    
+    x = random.randint(1,8)
+    if x == 1:
+        url1 = 'https://random-d.uk/api/random'
+        res = requests.get(url1)
+        data = res.json()
+        return data['url1']
+    elif x == 2:
+        url2 = ' https://some-random-api.ml/img/turtle'
+        res = requests.get(url2)
+        data = res.json()
+        return data['url2']
+    elif x == 3:
+        url3 = 'https://some-random-api.ml/img/koala'
+        res = requests.get(url3)
+        data = res.json()
+        return data['url3']
+    elif x == 4:
+        url4 = 'https://some-random-api.ml/img/birb'
+        res = requests.get(url4)
+        data = res.json()
+        return data['url4']
+    elif x == 5:
+        url5 = 'https://some-random-api.ml/img/panda'
+        res = requests.get(url5)
+        data = res.json()
+        return data['url5']
+    elif x == 6:
+        url6 = 'https://aws.random.cat/meow'
+        res = requests.get(url6)
+        data = res.json()
+        return data['url6']
+    elif x == 7:
+        url7 = 'https://random.dog/woof.json'
+        res = requests.get(url7)
+        data = res.json()
+        return data['url7']
+    elif x == 8:
+        url8 = 'https://randomfox.ca/floof/?ref=apilist.fun'
+        res = requests.get(url8)
+        data = res.json()
+        return data['url8']
+
+@bot.command('animals')
+async def duck(ctx):
+    image_url = get_animals_image_url()
+    await ctx.send(image_url)
+bot.run("TOKEN")
